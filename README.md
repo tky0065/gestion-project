@@ -7,6 +7,10 @@ développée avec Loopback 4. Elle permet la gestion des projets, des tâches, d
 équipes, des utilisateurs et des commentaires, avec un système
 d'authentification JWT intégré.
 
+## Demo Image
+
+![Demo Image](demo.png)
+
 ## Technologies Utilisées
 
 - **Framework**: Loopback 4
