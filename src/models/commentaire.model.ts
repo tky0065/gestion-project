@@ -1,6 +1,7 @@
-import {Entity, belongsTo, model, property} from '@loopback/repository';
-import { Tache } from './tache.model';
-import { Utilisateur } from './utilisateur.model';
+// src/models/commentaire.model.ts
+import {belongsTo, Entity, model, property} from '@loopback/repository';
+import {Tache} from './tache.model';
+import {Utilisateur} from './utilisateur.model';
 
 @model()
 export class Commentaire extends Entity {
@@ -20,21 +21,19 @@ export class Commentaire extends Entity {
   @property({
     type: 'date',
     required: true,
+    jsonSchema: {
+      format: 'date-time',
+    },
   })
   dateCreation: string;
 
-  @belongsTo(() => Tache)
+  @belongsTo(() => Tache, {name: 'tache'})
   tacheId: string;
 
-  @belongsTo(() => Utilisateur)
+  @belongsTo(() => Utilisateur, {name: 'auteur'})
   auteurId: string;
+
   constructor(data?: Partial<Commentaire>) {
     super(data);
   }
 }
-
-export interface CommentaireRelations {
-  // describe navigational properties here
-}
-
-export type CommentaireWithRelations = Commentaire & CommentaireRelations;

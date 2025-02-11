@@ -1,8 +1,8 @@
-// src/models/projet-utilisateur.model.ts
+// src/models/equipe-utilisateur.model.ts
 import {Entity, model, property} from '@loopback/repository';
 
 @model()
-export class ProjetUtilisateur extends Entity {
+export class EquipeUtilisateur extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -14,7 +14,7 @@ export class ProjetUtilisateur extends Entity {
     type: 'string',
     required: true,
   })
-  projetId: string;
+  equipeId: string;
 
   @property({
     type: 'string',
@@ -24,10 +24,11 @@ export class ProjetUtilisateur extends Entity {
 
   @property({
     type: 'string',
+    default: 'membre',
   })
   role?: string;
 
-  constructor(data?: Partial<ProjetUtilisateur>) {
+  constructor(data?: Partial<EquipeUtilisateur>) {
     super(data);
   }
 }

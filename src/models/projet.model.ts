@@ -1,17 +1,18 @@
-import {Entity, belongsTo, hasMany, model, property} from '@loopback/repository';
-import { Tache } from './tache.model';
-import { Equipe } from './equipe.model';
-import { Utilisateur } from './utilisateur.model';
-import { ProjetUtilisateur } from './projet-utilisateur.model';
+// src/models/projet.model.ts
+import {
+  belongsTo,
+  Entity,
+  hasMany,
+  model,
+  property,
+} from '@loopback/repository';
+import {Tache} from './tache.model';
+import {Utilisateur} from './utilisateur.model';
+import {Equipe} from './equipe.model';
+import {ProjetUtilisateur} from './projet-utilisateur.model';
 
 @model()
 export class Projet extends Entity {
-  @property({
-    type: 'string',
-    required: true,
-  })
-  nom: string;
-
   @property({
     type: 'string',
     id: true,
@@ -21,18 +22,30 @@ export class Projet extends Entity {
 
   @property({
     type: 'string',
+    required: true,
+  })
+  nom: string;
+
+  @property({
+    type: 'string',
   })
   description?: string;
 
   @property({
-    type: 'date',
+    type: 'string',
     required: true,
+    jsonSchema: {
+      format: 'date-time',
+    },
   })
   dateDebut: string;
 
   @property({
-    type: 'date',
+    type: 'string',
     required: true,
+    jsonSchema: {
+      format: 'date-time',
+    },
   })
   dateFin: string;
 
@@ -40,13 +53,12 @@ export class Projet extends Entity {
     type: 'string',
     required: true,
   })
-  status: string;
+  statut: string;
 
   @property({
     type: 'number',
-    required: true,
   })
-  budget: number;
+  budget?: number;
 
   @hasMany(() => Tache)
   taches: Tache[];
@@ -55,15 +67,9 @@ export class Projet extends Entity {
   equipeId: string;
 
   @hasMany(() => Utilisateur, {through: {model: () => ProjetUtilisateur}})
-  utilisateurs: Utilisateur[];
+  membres: Utilisateur[];
+
   constructor(data?: Partial<Projet>) {
     super(data);
   }
 }
-
-export interface ProjectRelations {
-  // describe navigational properties here
-
-}
-
-export type ProjectWithRelations = Projet & ProjectRelations;

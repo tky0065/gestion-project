@@ -1,7 +1,7 @@
-import {Entity, belongsTo, hasMany, model, property} from '@loopback/repository';
-import { Projet } from './projet.model';
-import { Utilisateur } from './utilisateur.model';
-import { Commentaire } from './commentaire.model';
+// src/models/tache.model.ts
+import {belongsTo, Entity, model, property} from '@loopback/repository';
+import {Projet} from './projet.model';
+import {Utilisateur} from './utilisateur.model';
 
 @model()
 export class Tache extends Entity {
@@ -25,49 +25,35 @@ export class Tache extends Entity {
 
   @property({
     type: 'date',
-  required: true,
-})
-dateDebut: string;
+    required: true,
+  })
+  dateDebut: string;
 
-@property({
-  type: 'date',
-  required: true,
-})
-dateFin: string;
+  @property({
+    type: 'date',
+    required: true,
+  })
+  dateFin: string;
 
-@property({
-  type: 'string',
-  required: true,
-})
-priorite: string;
+  @property({
+    type: 'string',
+    required: true,
+  })
+  priorite: string;
 
-@property({
-  type: 'string',
-  required: true,
-})
-statut: string;
+  @property({
+    type: 'string',
+    required: true,
+  })
+  statut: string;
 
-@belongsTo(() => Projet)
-projetId: string;
+  @belongsTo(() => Projet)
+  projetId: string;
 
-@belongsTo(() => Utilisateur)
-assigneId: string;
-
-@hasMany(() => Commentaire)
-commentaires: Commentaire[];
-
-
-
-
+  @belongsTo(() => Utilisateur)
+  assigneId: string;
 
   constructor(data?: Partial<Tache>) {
     super(data);
   }
 }
-
-export interface TacheRelations {
-  // describe navigational properties here
-}
-
-
-export type TacheWithRelations = Tache & TacheRelations;
